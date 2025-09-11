@@ -30,7 +30,7 @@ public class UserDaoHibernateImpl implements UserDao {
             session.createNativeQuery(sql).executeUpdate();
             transaction.commit();
 
-        } catch (HibernateException e) {
+        } catch (Exception e) {
             if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
             }
@@ -46,7 +46,7 @@ public class UserDaoHibernateImpl implements UserDao {
             transaction = session.beginTransaction();
             session.createNativeQuery("DROP TABLE IF EXISTS Users").executeUpdate();
             transaction.commit();
-        } catch (HibernateException e) {
+        } catch (Exception e) {
             if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
             }
@@ -64,7 +64,7 @@ public class UserDaoHibernateImpl implements UserDao {
             session.persist(user);
             session.getTransaction().commit();
 
-        } catch (HibernateException e) {
+        } catch (Exception e) {
             if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
             }
@@ -80,7 +80,7 @@ public class UserDaoHibernateImpl implements UserDao {
             session.remove(session.get(User.class, id));
             session.getTransaction().commit();
 
-        } catch (HibernateException e) {
+        } catch (Exception e) {
             if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
             }
@@ -96,7 +96,7 @@ public class UserDaoHibernateImpl implements UserDao {
             transaction = session.beginTransaction();
             result = session.createQuery("from User").list();
             session.getTransaction().commit();
-        } catch (HibernateException e) {
+        } catch (Exception e) {
             if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
             }
@@ -112,7 +112,7 @@ public class UserDaoHibernateImpl implements UserDao {
             transaction = session.beginTransaction();
             session.createQuery("delete User").executeUpdate();
             session.getTransaction().commit();
-        } catch (HibernateException e) {
+        } catch (Exception e) {
             if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
             }
